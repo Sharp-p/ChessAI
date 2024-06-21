@@ -19,13 +19,13 @@
 
 # COSE DA FARE:
 1. Come prendere testo in file compresso, o come decomprimere file compresso da 30GB 		[FATTO]
-2. Trasformarlo in FEN (https://github.com/SindreSvendby/pgnToFen potrebbe essere utile)	[FATTO] 	
-3. Trasformare il FEN nella bitboard
-	- Usare pychess per prendere la posizione di tutti i tipi di pedine come bit, appenderle ad una lista
-	- 
-4. Estrarre dal PGN le eval per ogni stato della board in FEN/bitboard
+2. Leggere ogni mossa di ogni partita, pur che sia valida									[FATTO] 	
+3. Trasformare il FEN in binario															[FATTO]
 5. Eliminare il vecchio db/Fare nuovo db ChessMatches con tabella Matches con attributi:
 	- ID mossa
 	- FEN
-	- Bitboards (codifica FEN)
+	- Binario (codifica FEN)
 	- Eval
+6. Scrivere il codice per popolare il DB
+7. Capire come funziona Collab
+8. Popolare il DB
