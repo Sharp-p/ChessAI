@@ -3,4 +3,4 @@
 __pycache__
 .venv/
 *.pdf
-*.db
+ChessPositions.db
