@@ -79,7 +79,9 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
                         #stringa che mi dice a chi tocca muovere w=1 b=0
                         binary_turn= str(int(node.turn()))
                         
-                        #stringa che mi fa una corrispondenza tra la presenza delle
+                        #non includo nel dataset queste informazioni perché 
+                        # quando andrà ad eseguire non gli verranno fornite
+                        """ #stringa che mi fa una corrispondenza tra la presenza delle
                         # lettere KQkq e 1 e 0, in caso di prensenza o assenza
                         castling_rights= board.castling_xfen()
                         binary_castling= "0000"
@@ -111,17 +113,17 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
                         #ottengo la stringa binaria che rappresenta il numero di mosse
                         binary_moves= "{0:b}".format(board.fullmove_number)
                         binary_moves= binary_moves.zfill(8)
-                        
-                        #FEN in binario
-                        binary_fen= bitboards + binary_turn + binary_castling + \
-                                    binary_square + binary_ply + binary_moves
+                         """
+                        #FEN parziale in binario
+                        binary_fen= bitboards + binary_turn
                         
                         #evaluation
                         eval= node.eval().white().score(mate_score= 32765) if node.eval() != None else None
 
                         #popolamento del db
                         try:
-                            cur.execute("INSERT INTO position VALUES(?, ?, ?, ?)", (movesId, board.fen(), binary_fen, eval))
+                            cur.execute("INSERT INTO position VALUES(?, ?, ?, ?)", 
+                                        (movesId, board.fen(), binary_fen, eval))
                         except Error as e:
                             print(f"Qualcosa è andato storto. ({e})")
 
@@ -129,7 +131,7 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
 
                     if (counter_games % 10) == 0:
                         print(f'\n============= PARTITA {counter_games} =============')
-                    if counter_games == 2000:
+                    if counter_games == 20:
                         break
 
                 node= chess.pgn.read_game(file)#Game della partita successiva del file
