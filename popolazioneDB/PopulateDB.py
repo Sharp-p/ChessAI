@@ -131,8 +131,6 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
 
                     if (counter_games % 10) == 0:
                         print(f'\n============= PARTITA {counter_games} =============')
-                    if counter_games == 20:
-                        break
 
                 node= chess.pgn.read_game(file)#Game della partita successiva del file
 con.close()
