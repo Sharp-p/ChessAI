@@ -4,3 +4,12 @@ __pycache__
 .venv/
 *.pdf
 ChessPositions.db
+
+/runs
+/cv/runs
+/cv/chessboard/runs
+/cv/chess_pieces/runs
+/cv/chessboard/__pycache__
+/cv/chess_pieces/__pycache__
+/.mypy_cache
+/.venv
