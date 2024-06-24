@@ -54,7 +54,11 @@ def getPieces(result):
 
 def getPiecesList(filename):
     # Load the model
-    model = YOLO("chess_pieces.pt")
+    try:
+        model = YOLO("chess_pieces.pt")
+    except:
+        model = YOLO("cv/chess_pieces.pt")
+    
 
     # Preprocess the image
     img = cv2.imread(filename)
