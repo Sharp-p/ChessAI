@@ -14,3 +14,5 @@ ChessPositions.db
 /cv/chess_pieces/__pycache__
 /.mypy_cache
 /.venv
+
+best_moves.svg

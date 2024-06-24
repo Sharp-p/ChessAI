@@ -1,7 +1,7 @@
 import cv2
 
-from chessboard.chessboard import getChessboardCorners
-from chess_pieces.chess_pieces import getPiecesList
+from cv.chessboard.chessboard import getChessboardCorners
+from cv.chess_pieces.chess_pieces import getPiecesList
 
 import numpy as np
 

@@ -50,7 +50,11 @@ def sortPoints(approx):
 
 def getChessboardCorners(filename):
     # Load the model
-    model = YOLO("chessboard.pt")
+    try:
+        model = YOLO("chessboard.pt")
+    except:
+        model = YOLO("cv/chessboard.pt")
+    
 
     # Preprocess the image
     img = cv2.imread(filename)

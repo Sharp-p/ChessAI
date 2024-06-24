@@ -1,6 +1,13 @@
 import chess
 import chess.svg
 
+# Da importare 
+# from ModelloAI.ChessAiTraining import (?)
+
+from cv.cv import getFen
+
+import sys
+
 # Supponiamo che tu abbia una funzione che prenda un FEN e restituisca una valutazione.
 def evaluate_position(fen):
     # Qui chiamo il modello per valutare la posizione data dal FEN.
@@ -36,13 +43,24 @@ def generate_svg_with_best_moves(fen, top_moves, output_file='best_moves.svg'):
     with open(output_file, 'w') as f:
         f.write(svg_board)
 
-# Esempio di utilizzo
-fen = "r1b1k2B/1pp1qp2/2n1p2p/8/4Q1P1/b7/p1PP1P1P/K2R1BNR w q - 2 15"
-top_moves = find_best_moves(fen)
 
-# Stampa le migliori mosse
-for move, evaluation in top_moves:
-    print(f"Mossa: {move}, Valutazione: {evaluation}")
 
-# Generare l'SVG con le migliori mosse evidenziate
-generate_svg_with_best_moves(fen, top_moves)
+if __name__ == '__main__':
+    assert len(sys.argv) == 3, "Usage: ./main.py filename turn[w/b]"
+    assert sys.argv[2] == 'w' or sys.argv[2] == 'b', "Usage: ./main.py filename turn[w,b]"
+    
+    filename = sys.argv[1]
+    turn = sys.argv[2]
+
+    fen = getFen(filename) + " " + turn
+
+    print(fen)
+    
+    top_moves = find_best_moves(fen)
+
+    # Stampa le migliori mosse
+    for move, evaluation in top_moves:
+        print(f"Mossa: {move}, Valutazione: {evaluation}")
+
+    # Generare l'SVG con le migliori mosse evidenziate
+    generate_svg_with_best_moves(fen, top_moves)
