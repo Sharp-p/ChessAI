@@ -5,6 +5,8 @@ __pycache__
 *.pdf
 ChessPositions.db
 *.ipynb
+/lightning_logs
+*.zip
 
 /runs
 /cv/runs
