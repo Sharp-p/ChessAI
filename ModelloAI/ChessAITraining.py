@@ -13,6 +13,9 @@ from collections import OrderedDict
 from IPython.display import display, SVG
 from datetime import timedelta
 import matplotlib.pyplot as plt
+""" import pysvg.sructures
+import pysvg.builders
+import pysvg.text """
 
 def restart():
     os.execv(sys.executable, [os.path.basename(sys.executable)] + sys.argv)
@@ -125,7 +128,7 @@ if train:
             #restart()
         print("E qua pure")
 
-model= EvaluationModel.load_from_checkpoint("ckpt/epoch=0-step=8.ckpt", layer_count= configs[0]['layer_count'])
+model= EvaluationModel.load_from_checkpoint("Predicter.ckpt", layer_count= configs[0]['layer_count'])
 model.eval()
 
 def svg_url(fen):
@@ -179,7 +182,7 @@ def guess_material_loss(idx):
 def guess_model_loss(idx):
   eval = Position.select().where(Position.id == idx+1).get()
   batch = dataset[idx]
-  x, y = torch.tensor(batch['binary']), torch.tensor(batch['eval'])
+  x, y = torch.tensor(batch['binary'], device='cuda'), torch.tensor(batch['eval'], device='cuda')
   y_hat = model(x)
   loss = F.l1_loss(y_hat, y)
   return loss
