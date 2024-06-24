@@ -21,8 +21,8 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
     counter_games = 0
     movesId= 0
     
-    with con:        
-    
+    try:
+            
         while node != None:#itero sui Game
             board= node.board()
             node= node.next()#nodo successivo sull'albero della partita
@@ -130,9 +130,13 @@ lichess_db_standard_rated_2023-03.pgn.zst', 'r') as file:
                         print(f"Qualcosa è andato storto. ({e})")
                     
                     node= node.next()#vado allo stato, ChildNode, successivo
-                    
-                if (counter_games % 10) == 0:
-                    print(f'\n============= PARTITA {counter_games} =============')
 
+                if (counter_games % 5000) == 0:
+                    print(f'\n============= PARTITA {counter_games} =============')
             node= chess.pgn.read_game(file)#Game della partita successiva del file
+    except KeyboardInterrupt:
+        con.commit()
+        con.close()
+        exit()
+con.commit()
 con.close()

@@ -14,4 +14,9 @@ for row in cur: print(row)
 con.commit()
  """
 
+#====== COUNT ======
+
+#cur.execute("SELECT COUNT(*) FROM position")
+#print(cur.fetchone())
+
 con.close()
